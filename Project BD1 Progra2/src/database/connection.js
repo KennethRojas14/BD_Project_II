@@ -1,11 +1,14 @@
 //Importación del módulo 'mssql' para gestionar la conexión con la base de datos SQL Server
 import sql from 'mssql'
 
+import {config} from 'dotenv'
+config();
+
 export const dbSettings = {
-    user : 'Ejemplo',
-    password : 'Ejemplo123',
-    server : 'Ejemplo',
-    database : 'Ejemplo',
+    user : process.env.USER,
+    password : process.env.PASSWORD,
+    server : process.env.SERVER,
+    database : process.env.DATABASE,
     options : {
         encrypt : true,
         trustServerCertificate : true
