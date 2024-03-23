@@ -1,7 +1,6 @@
 {
   "name": "proyect-bd1-progra2",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js --exec babel-node"
@@ -23,5 +22,8 @@
     "@babel/node": "^7.23.9",
     "@babel/preset-env": "^7.24.3",
     "nodemon": "^3.1.0"
-  }
+  },
+  "description": "",
+  "inst_1": "npm install mssql morgan express ejs body-parser dotenv ",
+  "inst_2": "npm i @babel/core @babel/cli @babel/preset-env  @babel/node nodemon -D"
 }
