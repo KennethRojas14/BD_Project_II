@@ -1,6 +1,5 @@
 //Este archivo archivo es el que ejecuta el programa
-
-import app from './app'
+const app = require('./app')
 
 app.listen(app.get('port'))
 

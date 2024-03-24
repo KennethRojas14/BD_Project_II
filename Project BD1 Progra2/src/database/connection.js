@@ -1,10 +1,8 @@
 //Importación del módulo 'mssql' para gestionar la conexión con la base de datos SQL Server
-import sql from 'mssql'
+const sql = require('mssql')
+require('dotenv').config();
 
-import {config} from 'dotenv'
-config();
-
-export const dbSettings = {
+const dbSettings = {
     user : process.env.USER,
     password : process.env.PASSWORD,
     server : process.env.SERVER,
@@ -15,8 +13,7 @@ export const dbSettings = {
     }
 }
 
-export async function getConnection () {
-
+async function getConnection () {
     try{
         // Conectar al servidor de base de datos utilizando la configuración para Kenneth ó Jorge
         const pool = await sql.connect(dbSettings);
@@ -26,4 +23,4 @@ export async function getConnection () {
     }
 }
 
-export { sql };
+module.exports = {getConnection}

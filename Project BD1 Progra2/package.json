@@ -3,25 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js --exec babel-node"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.1",
     "morgan": "^1.10.0",
     "mssql": "^10.0.2"
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.24.1",
-    "@babel/core": "^7.24.3",
-    "@babel/node": "^7.23.9",
-    "@babel/preset-env": "^7.24.3",
-    "nodemon": "^3.1.0"
   },
   "description": "",
   "inst_1": "npm install mssql morgan express ejs body-parser dotenv ",

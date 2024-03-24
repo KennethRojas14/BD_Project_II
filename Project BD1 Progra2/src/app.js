@@ -1,14 +1,24 @@
 //En este archivo se hacen las configuraciones de express
-import express from 'express'; 
-import config from './config';
+const express = require('express')  // Módulo para crear aplicaciones web con Node.js
+const cors = require('cors');        // Módulo para habilitar el manejo de solicitudes CORS
+const { userRouter } = require('./routes/user.routes')
+
+const port = require('./config');
  
 const app = express();
 
 // settings
-app.set('port', config.port);
+app.set('port', port);
+
+app.set('view engine', 'ejs');      // Configuración del motor de plantillas a EJS
 
 // middlewares
-app.use(express.json());
 app.use(express.urlencoded({extended: false})); 
+app.use(express.json());
 
-export default app;
+// Configuración de middleware para habilitar solicitudes CORS
+app.use(cors());
+
+app.use(userRouter)
+
+module.exports = app;
