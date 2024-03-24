@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Datos>
+    <Puestos>
+        <Puesto Nombre="Cajero" SalarioxHora="11.00" />
+        <Puesto Nombre="Camarero" SalarioxHora="10.00" />
+        <Puesto Nombre="Cuidador" SalarioxHora="13.50" />
+        <Puesto Nombre="Conductor" SalarioxHora="15.00" />
+        <Puesto Nombre="Asistente" SalarioxHora="11.00" />
+        <Puesto Nombre="Recepcionista" SalarioxHora="12.00" />
+        <Puesto Nombre="Fontanero" SalarioxHora="13.00" />
+        <Puesto Nombre="Niñera" SalarioxHora="12.00" />
+        <Puesto Nombre="Conserje" SalarioxHora="11.00" />
+        <Puesto Nombre="Albañil" SalarioxHora="10.50" />
+    </Puestos>
+    <TiposEvento>
+        <TipoEvento Id="1" Nombre="Login Exitoso" />
+        <TipoEvento Id="2" Nombre="Login No Exitoso" />
+        <TipoEvento Id="3" Nombre="Login deshabilitado" />
+        <TipoEvento Id="4" Nombre="Logout" />
+        <TipoEvento Id="5" Nombre="Insercion no exitosa" />
+        <TipoEvento Id="6" Nombre="Insercion exitosa" />
+        <TipoEvento Id="7" Nombre="Update no exitoso" />
+        <TipoEvento Id="8" Nombre="Update exitoso" />
+        <TipoEvento Id="9" Nombre="Intento de borrado" />
+        <TipoEvento Id="10" Nombre="Borrado exitoso" />
+        <TipoEvento Id="11" Nombre="Consulta con filtro de nombre" />
+        <TipoEvento Id="12" Nombre="Consulta con filtro de cedula" />
+        <TipoEvento Id="13" Nombre="Intento de insertar movimiento" />
+        <TipoEvento Id="14" Nombre="Insertar movimiento exitoso" />
+    </TiposEvento>
+    <TiposMovimientos>
+        <TipoMovimiento Id="1" Nombre="Cumplir mes" TipoAccion="Credito" />
+        <TipoMovimiento Id="2" Nombre="Bono vacacional" TipoAccion="Credito" />
+        <TipoMovimiento Id="3" Nombre="Reversion Debito" TipoAccion="Credito" />
+        <TipoMovimiento Id="4" Nombre="Disfrute de vacaciones" TipoAccion="Debito" />
+        <TipoMovimiento Id="5" Nombre="Venta de vacaciones" TipoAccion="Debito" />
+        <TipoMovimiento Id="6" Nombre="Reversion de Credito" TipoAccion="Debito" />
+    </TiposMovimientos>
+    <Empleados>
+        <empleado Puesto="Cajero" ValorDocumentoIdentidad="2942372" Nombre="Nancy Best" FechaContratacion="2016-11-03" />
+        <empleado Puesto="Recepcionista" ValorDocumentoIdentidad="3716901" Nombre="Gabriel Reynolds" FechaContratacion="2022-11-16" />
+        <empleado Puesto="Recepcionista" ValorDocumentoIdentidad="4125696" Nombre="Sean Austin" FechaContratacion="2022-04-22" />
+        <empleado Puesto="Niñera" ValorDocumentoIdentidad="2353746" Nombre="Emily Norman" FechaContratacion="2016-12-27" />
+        <empleado Puesto="Conductor" ValorDocumentoIdentidad="6875754" Nombre="Cody Dickson" FechaContratacion="2023-02-06" />
+    </Empleados>
+    <Usuarios>
+        <usuario Id="1" Nombre="UsuarioScripts" Pass="UsuarioScripts" />
+        <usuario Id="2" Nombre="efisher" Pass="KS9Qz!IPW$" />
+        <usuario Id="3" Nombre="petersonlisa" Pass="F+i4C5feV!" />
+        <usuario Id="4" Nombre="paceryan" Pass="8D0!ULdfb" />
+        <usuario Id="5" Nombre="parkerluke" Pass="LA#+5Ag6F" />
+        <usuario Id="6" Nombre="iwilliams" Pass="$0nGNaaO^_" />
+    </Usuarios>
+    <Movimientos>
+        <movimiento ValorDocId="2353746" IdTipoMovimiento="Reversion de Credito" Fecha="2023-06-14" Monto="5" PostByUser="petersonlisa" PostInIP="193.148.176.152" PostTime="2023-06-14 07:27:08" />
+        <movimiento ValorDocId="6875754" IdTipoMovimiento="Reversion de Credito" Fecha="2024-01-30" Monto="3" PostByUser="paceryan" PostInIP="169.11.48.114" PostTime="2024-01-30 04:05:52" />
+        <movimiento ValorDocId="4125696" IdTipoMovimiento="Reversion de Credito" Fecha="2023-05-25" Monto="7" PostByUser="petersonlisa" PostInIP="200.123.122.185" PostTime="2023-05-25 17:14:32" />
+        <movimiento ValorDocId="2942372" IdTipoMovimiento="Cumplir mes" Fecha="2024-01-10" Monto="8" PostByUser="petersonlisa" PostInIP="93.139.9.59" PostTime="2024-01-10 00:28:04" />
+        <movimiento ValorDocId="6875754" IdTipoMovimiento="Reversion Debito" Fecha="2023-08-24" Monto="10" PostByUser="paceryan" PostInIP="165.162.182.212" PostTime="2023-08-24 14:29:02" />
+    </Movimientos>
+    <Error>
+        <error Codigo="50001" Descripcion="Username no existe" />
+        <error Codigo="50002" Descripcion="Password no existe" />
+        <error Codigo="50003" Descripcion="Login deshabilitado" />
+        <error Codigo="50004" Descripcion="Empleado con ValorDocumentoIdentidad ya existe en inserción" />
+        <error Codigo="50005" Descripcion="Empleado con mismo nombre ya existe en inserción" />
+        <error Codigo="50006" Descripcion="Empleado con ValorDocumentoIdentidad ya existe en actualizacion" />
+        <error Codigo="50007" Descripcion="Empleado con mismo nombre ya existe en actualización" />
+        <error Codigo="50008" Descripcion="Error de base de datos" />
+        <error Codigo="50009" Descripcion="Nombre de empleado no alfabético" />
+        <error Codigo="50010" Descripcion="Valor de documento de identidad no alfabético" />
+        <error Codigo="50011" Descripcion="Monto del movimiento rechazado pues si se aplicar el saldo seria negativo." />
+    </Error>
+</Datos>
