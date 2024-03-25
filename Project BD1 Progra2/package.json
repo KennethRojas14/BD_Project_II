@@ -18,6 +18,5 @@
     "mssql": "^10.0.2"
   },
   "description": "",
-  "inst_1": "npm install mssql morgan express ejs body-parser dotenv ",
-  "inst_2": "npm i @babel/core @babel/cli @babel/preset-env  @babel/node nodemon -D"
+  "inst": "npm install mssql morgan express ejs cors body-parser dotenv"
 }
