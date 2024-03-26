@@ -21,9 +21,9 @@ const root = async (req, res) => {
       .execute("loadXMLData");
   
     if (result.output.OutResulTCode == 0) {
-      console.log("Se cargaron los datos :D");
+      console.log("Se cargaron los datos :D"); 
     } else {
-      console.log("Algo salio mal con la carga de datos :O");
+      console.log("Algo salio mal con la carga de datos :O"); 
     }
     // Cerrar la conexión al pool
     pool.close();
@@ -31,7 +31,7 @@ const root = async (req, res) => {
     // Manejar errores internos del servidor
     console.log(error.message);
   }
-  res.redirect("login");
+  res.redirect("listEmployees");
 }
 
 //Cargar la vista "login"

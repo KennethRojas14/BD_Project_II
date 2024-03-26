@@ -2,6 +2,8 @@
 const express = require('express')  // Módulo para crear aplicaciones web con Node.js
 const cors = require('cors');        // Módulo para habilitar el manejo de solicitudes CORS
 const { userRouter } = require('./routes/user.routes')
+const { employeeRouter } = require('./routes/employee.routes')
+const { movementRouter } = require('./routes/movement.routes')
 
 const port = require('./config');
  
@@ -20,5 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use(userRouter)
+app.use(employeeRouter)
+app.use(movementRouter)
 
 module.exports = app;
