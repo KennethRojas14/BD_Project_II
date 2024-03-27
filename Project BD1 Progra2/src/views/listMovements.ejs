@@ -1,1 +1,109 @@
-<h2>Aquí se estarán listando los movimientos de un empleado</h2>
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+  <style>
+    .cmn-btncircle {
+      width: 44px !important;
+      height: 48px !important;
+      padding: 5px 0px;
+      border-radius: 15px;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .cmn-divfloat {
+      position: fixed !important;
+      bottom: 45px;
+      right: 15px;
+      display: visible;
+    }
+
+    .cmn-divfloat-left {
+      position: fixed !important;
+      bottom: 45px;
+      left: 15px;
+      display: visible;
+    }
+
+    .cont-center {
+      text-align: center;
+    }
+  </style>
+
+  <title>Lista de movimientos</title>
+
+</head>
+<body> 
+    <div class="container mt-3 mb-2 ">
+        <nav class="navbar navbar-dark border border-dark text-light" style="background: #424242;">
+            <box-icon name='user' type='solid' style="font-size: 35px; ">
+                <i class='bx bxs-user' ></i> 
+            </box-icon>
+            <p style="font-size: 20px; font-weight: 700; margin-top: 10px;">
+              <%= employee.Name %></p>
+            <p style="font-size: 20px; font-weight: 700; margin-top: 10px;">
+              Valor identidad: <%= employee.DocumentValueIdentity %></p>
+            <p style="font-size: 20px; font-weight: 700; margin-top: 10px;">
+              Saldo: <%= employee.BalanceHoliday %></p>
+        </nav>
+    </div>
+    <div class="container">
+      <h4>Movimientos:</h4>
+        <table class="table table-hover table-dark">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Nombre</th> 
+                    <th scope="col">Monto</th> 
+                    <th scope="col">Nuevo saldo</th> 
+                    <th scope="col">Usuario</th> 
+                    <th scope="col">Número IP</th> 
+                    <th scope="col">Tiempo</th> 
+                  </tr>
+            </thead>
+            <tbody>
+              <% movements.forEach((movement)=>{ %>
+                <tr>
+                  <td>
+                    <%= movement.Date %>
+                  </td>
+                  <td>
+                    <%= movement.Name %>
+                  </td>
+                  <td >
+                    <%= movement.Amount %>
+                  </td> 
+                  <td >
+                    <%= movement.NewBalance %>
+                  </td> 
+                  <td >
+                    <%= movement.NameUser %>
+                  </td> 
+                  <td >
+                    <%= movement.PostInIP %>
+                  </td> 
+                  <td >
+                    <%= movement.PostTime %>
+                  </td> 
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="cmn-divfloat-left">
+          <a href="http://localhost:3000/listEmployees" title="Volver" class="btn btn-dark cmn-btncircle">
+            <i class='bx bx-arrow-back'></i>
+          </a>
+        </div>
+    </div>
+</body>
+</html>
