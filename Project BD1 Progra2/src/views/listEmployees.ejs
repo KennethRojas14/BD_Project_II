@@ -21,6 +21,16 @@
       text-align: center;
     }
 
+    .alert-divfloat {
+      position: fixed !important;
+      bottom: 60%;
+      right: 20%;
+      left: 20%;
+      width: auto;
+      font-size: 18px;
+      border-radius: 15px;
+    }
+
     .cmn-divfloat {
       position: fixed !important;
       bottom: 45px;
@@ -80,31 +90,58 @@
             <td class="cont-center">
               <%= employee.DocumentValueIdentity %>
             </td>
-            <td class="cont-center"> 
-              <a href='/updateEmployee/<%=employee.Id%>' title="Editar" class="btn btn-outline-light ml-2"><i
-                  class='bx bxs-edit'></i></a>
-              <a href='/deleteEmployee/<%=employee.Id%>' title="Eliminar" class="btn btn-outline-light ml-1"><i
-                  class='bx bxs-trash-alt'></i></a>
-              <a href='/listMovements/<%=employee.Id%>' title="Movimientos" class="btn btn-outline-light ml-1"><i
-                 class='bx bx-list-plus'></i></a>
-              <a href='/consultEmployee/<%=employee.Id%>' title="Consultar" class="btn btn-outline-light ml-1"><i
-                  class='bx bx-info-circle'></i></a>
+            <td class="cont-center">
+              <form class="ml-2" action="/confirmDeleteEmployee" method="POST">
+                <a href='/updateEmployee/<%=employee.Id%>' title="Editar" class="btn btn-outline-light ml-2"><i
+                    class='bx bxs-edit'></i></a>
+
+                <input type="hidden" name="IdEmpleado" value="<%=employee.Id%>">
+                <button type="submit" title="Eliminar" class="btn btn-outline-light ml-1"><i
+                    class='bx bxs-trash-alt'></i></button>
+
+                <a href='/listMovements/<%=employee.Id%>' title="Movimientos" class="btn btn-outline-light ml-1"><i
+                    class='bx bx-list-plus'></i></a>
+                <a href='/consultEmployee/<%=employee.Id%>' title="Consultar" class="btn btn-outline-light ml-1"><i
+                    class='bx bx-info-circle'></i></a>
+              </form>
+
             </td>
           </tr>
           <% }) %>
       </tbody>
     </table>
 
-    <div class="cmn-divfloat">
-      <a href="http://localhost:3000/insertEmployee" title="Insertar" class="btn btn-dark cmn-btncircle">
-        <i class='bx bxs-plus-circle bx-md'></i>
-      </a>
-    </div>
-    <div class="cmn-divfloat-left">
-      <a href="http://localhost:3000/login" title="Cerrar sesión" class="btn btn-dark cmn-btncircle">
-        <i class='bx bx-arrow-back'></i>
-      </a>
-    </div>
+    <% if (alertVisibility) { %>
+      <div class="alert-divfloat">
+        <div class="alert alert-warning mt-3 ml-2 cont-center font-weight-bold" role="alert"
+          style="width: 95%; border-radius: 15px; color: #424242;">
+          <label class="ml-2 mb-2 d-block">
+            El empleado <%=employee.Name%> de identificaión <%=employee.DocumentValueIdentity%> será eliminado!!
+          </label>
+          <form class="ml-2" action="/deleteEmployee" method="POST">
+            <a href="http://localhost:3000/listEmployees" title="Cancelar" class="btn btn-outline-dark ml-2"
+            style="font-size: 15px;">
+            Cancelar
+            </a>
+            <input type="hidden" name="IdEmpleado" value="<%=employee.Id%>">
+            <button type="submit" title="Confirmar" class="btn btn-outline-dark ml-1" style="font-size: 15px;">
+              Confirmar
+            </button>
+          </form>
+        </div>
+      </div>
+      <% } %>
+
+        <div class="cmn-divfloat">
+          <a href="http://localhost:3000/insertEmployee" title="Insertar" class="btn btn-dark cmn-btncircle">
+            <i class='bx bxs-plus-circle bx-md'></i>
+          </a>
+        </div>
+        <div class="cmn-divfloat-left">
+          <a href="http://localhost:3000/login" title="Cerrar sesión" class="btn btn-dark cmn-btncircle">
+            <i class='bx bx-arrow-back'></i>
+          </a>
+        </div>
 
   </div>
 

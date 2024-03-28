@@ -46,14 +46,14 @@
 <body> 
     <div class="container mt-3 mb-2 ">
         <nav class="navbar navbar-dark border border-dark text-light" style="background: #424242;">
-            <box-icon name='user' type='solid' style="font-size: 35px; ">
+            <box-icon style="font-size: 35px; ">
                 <i class='bx bxs-user' ></i> 
             </box-icon>
             <p style="font-size: 20px; font-weight: 700; margin-top: 10px;">
               <%= employee.Name %></p>
             <p style="font-size: 20px; font-weight: 700; margin-top: 10px;">
               Valor identidad: <%= employee.DocumentValueIdentity %></p>
-            <p style="font-size: 20px; font-weight: 700; margin-top: 10px;">
+            <p style="font-size: 20px; font-weight: 700; margin-top: 10px; margin-right: 3px;">
               Saldo: <%= employee.BalanceHoliday %></p>
         </nav>
     </div>
@@ -64,8 +64,8 @@
                 <tr>
                     <th scope="col">Fecha</th>
                     <th scope="col">Nombre</th> 
-                    <th scope="col">Monto</th> 
-                    <th scope="col">Nuevo saldo</th> 
+                    <th class="cont-center" scope="col">Monto</th> 
+                    <th class="cont-center" scope="col">Nuevo saldo</th> 
                     <th scope="col">Usuario</th> 
                     <th scope="col">Número IP</th> 
                     <th scope="col">Tiempo</th> 
@@ -80,10 +80,10 @@
                   <td>
                     <%= movement.Name %>
                   </td>
-                  <td >
+                  <td class="cont-center">
                     <%= movement.Amount %>
                   </td> 
-                  <td >
+                  <td class="cont-center">
                     <%= movement.NewBalance %>
                   </td> 
                   <td >
