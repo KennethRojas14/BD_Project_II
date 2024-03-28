@@ -24,7 +24,8 @@
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1 col-0">Empleados</span>
         <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" name="IdEmpleado" aria-label="Search" placeholder="Buscar...">
+          <input class="form-control mr-sm-2" type="search" name="IdEmpleado" aria-label="Search"
+            placeholder="Buscar...">
           <button title="Buscar" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2" type="submit"><i
               class='bx bx-search'></i></button>
         </form>
@@ -84,8 +85,8 @@
           </label>
           <form class="ml-2" action="/deleteEmployee" method="POST">
             <a href="http://localhost:3000/listEmployees" title="Cancelar" class="btn btn-outline-dark ml-2"
-            style="font-size: 15px;">
-            Cancelar
+              style="font-size: 15px;">
+              Cancelar
             </a>
             <input type="hidden" name="IdEmpleado" value="<%=employee.Id%>">
             <button type="submit" title="Confirmar" class="btn btn-outline-dark ml-1" style="font-size: 15px;">
