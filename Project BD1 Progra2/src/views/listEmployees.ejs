@@ -11,44 +11,8 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-  <style>
-    .cmn-btncircle {
-      width: 44px !important;
-      height: 48px !important;
-      padding: 5px 0px;
-      border-radius: 15px;
-      font-size: 18px;
-      text-align: center;
-    }
-
-    .alert-divfloat {
-      position: fixed !important;
-      bottom: 60%;
-      right: 20%;
-      left: 20%;
-      width: auto;
-      font-size: 18px;
-      border-radius: 15px;
-    }
-
-    .cmn-divfloat {
-      position: fixed !important;
-      bottom: 45px;
-      right: 15px;
-      display: visible;
-    }
-
-    .cmn-divfloat-left {
-      position: fixed !important;
-      bottom: 45px;
-      left: 15px;
-      display: visible;
-    }
-
-    .cont-center {
-      text-align: center;
-    }
-  </style>
+  <!-- Referencia al archivo de estilos CSS -->
+  <link rel="stylesheet" href="/css/style.css">
 
   <title>Lista de empleados</title>
 
@@ -60,7 +24,7 @@
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1 col-0">Empleados</span>
         <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" aria-label="Search" placeholder="Buscar...">
+          <input class="form-control mr-sm-2" type="search" name="IdEmpleado" aria-label="Search" placeholder="Buscar...">
           <button title="Buscar" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2" type="submit"><i
               class='bx bx-search'></i></button>
         </form>

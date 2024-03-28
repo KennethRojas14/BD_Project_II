@@ -9,6 +9,7 @@ const port = require('./config');
  
 const app = express();
 
+
 // settings
 app.set('port', port);
 
@@ -24,5 +25,7 @@ app.use(cors());
 app.use(userRouter)
 app.use(employeeRouter)
 app.use(movementRouter)
+
+app.use(express.static('views'))
 
 module.exports = app;
