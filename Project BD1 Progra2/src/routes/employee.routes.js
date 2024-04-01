@@ -23,8 +23,10 @@ employeeRouter.post('/deleteEmployee', deleteEmployee)
 
 employeeRouter.get('/updateEmployee/:Id', updateEmployee)
 
+employeeRouter.get('/consultEmployee/:Id', consultEmployee)
+
 employeeRouter.post('/commitUpdateEmployee', commitUpdateEmployee)
 
-employeeRouter.get('/consultEmployee/:Id', consultEmployee)
+employeeRouter.post('/listEmployees', listOfEmployees)
 
 module.exports = { employeeRouter };

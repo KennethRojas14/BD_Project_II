@@ -23,12 +23,14 @@
     <nav class="navbar navbar-dark" style="background: #424242;">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1 col-0">Empleados</span>
-        <form class="form-inline">
-          <input class="form-control mr-sm-2" type="search" name="IdEmpleado" aria-label="Search"
+        <form class="form-inline" action="/listEmployees" method="POST">
+          
+          <input class="form-control mr-sm-2" type="search" name="contentSearch"
             placeholder="Buscar...">
           <button title="Buscar" class="btn btn-outline-light my-2 my-sm-0 mr-sm-2" type="submit"><i
               class='bx bx-search'></i></button>
-        </form>
+        
+            </form>
       </div>
     </nav>
   </div>

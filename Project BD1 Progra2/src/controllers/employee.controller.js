@@ -2,14 +2,61 @@ const { getConnection } = require("../database/connection");
 
 //Cargar la vista "listEmployees"
 const listOfEmployees = async (req, res) => {
+  var content = req.body.contentSearch;     // Variable que guarda el contenido de la entrada de busqueda.
+  if (content === undefined) {content = ''} // En caso de no realizar ninguna busqueda.
+
+  // Expresiones regulares utilizadas para evaluar el contenido de la entrada de busqueda.
+  const onlyNumbers = /^[0-9]+$/;
+  const onlyLetters = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
+
+  /*
+    if (onlyNumbers.test(content)) {
+      employees_ = await pool
+      .request()
+      .input('IdentificationToSearch', content)
+      .output("OutResulTCode", 0)
+      .execute("consultEmployeesIdentificationFilter");
+    }
+    if (onlyLetters.test(content)) {
+      employees_ = await pool
+      .request()
+      .input('NameToSearch', content)
+      .output("OutResulTCode", 0)
+      .execute("consultEmployeesNameFilter");
+    } 
+   */ 
   try {
     // Obtener una conexión desde el pool de conexiones
     const pool = await getConnection();
-    // Llamar al procedimiento almacenado consultEmployees
-    const employees_ = await pool
+    var employees_  = '';
+
+    if (onlyNumbers.test(content)) { // Llamada al SP consultEmployeesIdentificationFilter
+      employees_ = await pool 
       .request()
+      .input('IdentificationToSearch', content)
       .output("OutResulTCode", 0)
-      .execute("consultEmployees");
+      .execute("consultEmployeesIdentificationFilter");
+    }
+    if (onlyLetters.test(content)) { // Llamada al SP consultEmployeesNameFilter
+      employees_ = await pool
+      .request()
+      .input('NameToSearch', content)
+      .output("OutResulTCode", 0)
+      .execute("consultEmployeesNameFilter");
+    }  
+    if (content != '' && !onlyLetters.test(content) && !onlyNumbers.test(content)) {// Llamada especial al SP consultEmployeesNameFilter
+      employees_ = await pool
+      .request()
+      .input('NameToSearch', '##')
+      .output("OutResulTCode", 0)
+      .execute("consultEmployeesNameFilter");
+    } 
+    if (content == ''){ // Llamada al SP consultEmployees
+      employees_ = await pool
+        .request()
+        .output("OutResulTCode", 0)
+        .execute("consultEmployees");
+    }
     // Verificar si el procedimiento almacenado se ejecutó correctamente
     if (employees_.output.OutResulTCode == 0) {
       // Renderizar la vista "listEmployees" con los datos obtenidos de la consulta 

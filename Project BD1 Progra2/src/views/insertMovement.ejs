@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Referencia al archivo de estilos CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Inseción de movimiento</title>
+
+</head>
+
+<body> 
+    <div class="container">
+        <div class="m-4 d-flex justify-content-center mt-4" style="height: auto;">
+            <div class="bg-dark" style="width: 500px; height: auto;">
+                
+                <div class=" text-center mt-3"> 
+                    <h4 class="text-light">Inserción de movimiento</h4>
+                </div>
+
+                <form action="/insertMovement" method="post"> 
+                    <div class="form-group row mt-5 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Empleado:</label>
+                        <div> 
+                            <label class="ml-4 col-sm-auto col-form-label" style="font-weight: 600;"><%= employee.Name %></label>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Identificaión:</label>
+                        <div> 
+                            <label class="ml-4 col-sm-auto col-form-label" style="font-weight: 600;"><%= employee.DocumentValueIdentity %></label>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Saldo vacaciones:</label>
+                        <div> 
+                            <label class="ml-4 col-sm-auto col-form-label" style="font-weight: 600;"><%= employee.BalanceHoliday %></label>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2 text-light">
+                        <label class="ml-4 col-sm-6 col-form-label" style="font-weight: 600;">Monto</label>
+                        <div>
+                            <input type="number" name="Monto" class="form-control col-sm-auto" style="border-radius: 8px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-3 text-light">  
+                        <label class="ml-4 col-sm-6 col-form-label" style="font-weight: 600;">Tipo de movimiento:</label>
+                        <select class="form-select " name="TypeMovement" style="border-radius: 8px; width: 39%"> 
+                            <% movements.forEach((movement)=>{ %>
+                                <option value="<%=movement.Name%>"><%=movement.Name%></option>
+                                
+                            <% }) %>  
+                        </select> 
+
+                    </div>
+                    <div class="form-group mb-4">
+                        <input type="hidden" name="IdEmpleado" value="<%= employee.Id %>">
+                        <button type="submit" title="Insertar" class="btn btn-outline-light ml-4 mt-4 d-flex"
+                            style="font-size: 15px;">
+                            Insertar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="cmn-divfloat-left">
+                <a href="http://localhost:3000/listMovements/<%= employee.Id %>" title="Volver" class="btn btn-dark cmn-btncircle">
+                    <i class='bx bx-arrow-back'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
