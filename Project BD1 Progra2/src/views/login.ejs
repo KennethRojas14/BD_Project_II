@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -14,35 +14,45 @@
     <!-- Referencia al archivo de estilos CSS -->
     <link rel="stylesheet" href="/css/style.css">
 
-    <title>Inicio de Sesión</title>
+    <title>Iniciar Sesion</title>
 
 </head>
 
-<body>
+<body> 
     <div class="container">
         <div class="m-4 d-flex justify-content-center mt-4" style="height: auto;">
             <div class="bg-dark" style="width: 500px; height: auto;">
-                <div class="card-header bg-dark text-white" >
-                    Iniciar sesión
+                
+                <div class=" text-center mt-3"> 
+                    <h4 class="text-light">Iniciar Sesion</h4>
                 </div>
-                <div class="card-body">
-                    <form action="/login" method="post">
-                        <div class="form-group text-white">
-                            <label for="username">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="username" name="username"
-                                placeholder="Ingrese su nombre de usuario" required>
+
+                <form action="/Login" method="post"> 
+                    <div class="form-group row mt-5 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Usuario</label>
+                        <div> 
+                            <input type="text" name="username" class="form-control col-sm-auto" style="border-radius: 8px;" required>
                         </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Ingrese su contraseña" required>
+                    </div>
+                    <div class="form-group row mt-2 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Password</label>
+                        <div> 
+                            <input type="password" name="password" class="form-control col-sm-auto" style="border-radius: 8px;" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group mb-4">
+                        <button type="submit" title="Insertar" class="btn btn-outline-light ml-4 mt-4 d-flex"
+                            style="font-size: 15px;">
+                            Iniciar Sesion
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
+
 </body>
 
 </html>
+

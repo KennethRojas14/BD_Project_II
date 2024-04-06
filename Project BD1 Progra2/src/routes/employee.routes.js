@@ -4,6 +4,7 @@ const Router = require('express');
 const { 
     listOfEmployees
     , addEmployees
+    , CheckEmployees
     , confirmDeleteEmployee
     , deleteEmployee
     , updateEmployee
@@ -16,6 +17,8 @@ const employeeRouter = Router();
 employeeRouter.get('/listEmployees', listOfEmployees)
 
 employeeRouter.get('/insertEmployee', addEmployees)
+
+employeeRouter.post('/insertEmployee', CheckEmployees)
 
 employeeRouter.post('/confirmDeleteEmployee', confirmDeleteEmployee)
 

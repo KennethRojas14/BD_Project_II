@@ -74,11 +74,45 @@ const listOfEmployees = async (req, res) => {
   }
 };
 
-//Cargar la vista "insertEmployee"
-const addEmployees = (req, res) => {
-  //Carga la vista "insertEmployee"
-  res.render("insertEmployee");
+const addEmployees = async (req, res) => {
+  res.render('insertEmployee')
+}
+
+const CheckEmployees = async (req, res) => {
+  const nameEmployee = req.body.nameEmployee;
+  const identity = req.body.identity;
+  const position = req.body.position;
+  try {
+    // Obtener una conexión desde el pool de conexiones
+    const pool = await getConnection();
+    // Llamar al procedimiento almacenado insertEmployee
+    const employee_ = await pool
+      .request()
+      .input("InNameEmployee", nameEmployee)
+      .input("InDocumentIdentity", identity)
+      .input("InPosition", position)
+      .output("OutResultCode", 0)
+      .execute("insertEmployee");
+
+    if (employee_.output.OutResultCode == 0) {
+      // Renderizar la vista "listEmployees" con los datos obtenidos de las consultas 
+      res.redirect("listEmployees");
+    } else {
+      // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
+      console.log("Variable salida:", employee_.output.OutResultCode);
+      // Enviar una respuesta al cliente indicando que hubo un error
+      res.status(500).send("Error al insertar el empleado.");
+    }
+    // Cerrar la conexión al pool
+    pool.close();
+  } catch (error) {
+    // Manejar errores internos del servidor
+    console.error("Error interno del servidor:", error.message);
+    // Enviar una respuesta al cliente indicando que hubo un error
+    res.status(500).send("Error interno del servidor.");
+  }
 };
+
 
 //Se despliega la alerta para confirmar eliminacion de empleado
 const confirmDeleteEmployee = async (req, res) => {
@@ -287,6 +321,7 @@ const consultEmployee = async (req, res) => {
 module.exports = {
   listOfEmployees
   , addEmployees
+  , CheckEmployees
   , confirmDeleteEmployee
   , deleteEmployee
   , updateEmployee
