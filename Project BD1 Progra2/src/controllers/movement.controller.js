@@ -99,7 +99,7 @@ const commitAddMovement = async (req, res) => {
       .execute("insertMovement"); 
     // Verificar si el procedimiento almacenado se ejecutó correctamente
     if (insertMovement.output.OutResulTCode == 0) {
-      // Redoreción a la vista "listMovements" con los datos obtenidos de la consulta  
+      //Redoreción a la vista "listMovements" con los datos obtenidos de la consulta  
       res.redirect('/listMovements/'+IdEmployee);
     } else {
       // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente

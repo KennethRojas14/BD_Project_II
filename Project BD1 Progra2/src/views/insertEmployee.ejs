@@ -1,1 +1,79 @@
+<<<<<<< Updated upstream
 <h2>Aquí se insertarán empleados</h2>
+=======
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Referencia al archivo de estilos CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Insertar Nuevo Empleado</title>
+
+</head>
+
+<body> 
+    <div class="container">
+        <div class="m-4 d-flex justify-content-center mt-4" style="height: auto;">
+            <div class="bg-dark" style="width: 500px; height: auto;">
+                
+                <div class=" text-center mt-3"> 
+                    <h4 class="text-light">Inserción de empleado</h4>
+                </div>
+
+                <form action="/insertEmployee" method="post"> 
+                    <div class="form-group row mt-5 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Nombre:</label>
+                        <div> 
+                            <input type="text" name="nameEmployee" class="form-control col-sm-auto" style="border-radius: 8px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-2 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Valor tipo documento:</label>
+                        <div> 
+                            <input type="text" name="identity" class="form-control col-sm-auto" style="border-radius: 8px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-3 text-light">
+                        <label class="ml-4 col-sm-6 col-form-label" style="font-weight: 600;">Puesto:</label>
+                        <select class="form-select " name="position" style="border-radius: 8px; width: 39%" required> 
+                            <option value="cajero">Cajero</option>
+                            <option value="camarero">Camarero</option>
+                            <option value="cuidador">Cuidador</option>
+                            <option value="Conductor">Conductor</option>
+                            <option value="Asistente">Asistente</option>
+                            <option value="Recepcionista">Recepcionista</option>
+                            <option value="Fontanero">Fontanero</option>
+                            <option value="Niñera">Niñera</option>
+                            <option value="Conserje">Conserje</option>
+                            <option value="Albañil">Albañil</option>
+                        </select> 
+                    </div>
+                    <span class="d-flex mb-3 ml-4" style="color: red">
+                        <%= errorMessage %>
+                      </span>
+                    <div class="form-group mb-4">
+                        <button type="submit" title="Insertar" class="btn btn-outline-light ml-4 mt-4 d-flex"
+                            style="font-size: 15px;">
+                            Insertar
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+>>>>>>> Stashed changes

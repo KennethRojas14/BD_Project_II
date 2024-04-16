@@ -1,7 +1,7 @@
 // Importación del módulo 'express' para la creación de rutas (URLs)
 const Router = require('express');
 // Importación de funciones desde el controlador employe.controller
-const { root, CheckloginUser, loginUser } = require('../controllers/user.controller');
+const { root, CheckloginUser, loginUser, InsertEvents } = require('../controllers/user.controller');
 
 const userRouter = Router();
 

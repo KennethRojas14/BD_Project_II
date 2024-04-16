@@ -1,30 +1,18 @@
 const { getConnection } = require("../database/connection");
 
+const ip = require("ip");
 //Cargar la vista "listEmployees"
 const listOfEmployees = async (req, res) => {
   var content = req.body.contentSearch;     // Variable que guarda el contenido de la entrada de busqueda.
-  if (content === undefined) {content = ''} // En caso de no realizar ninguna busqueda.
+  if (content == undefined) {content = ''} // En caso de no realizar ninguna busqueda.
 
   // Expresiones regulares utilizadas para evaluar el contenido de la entrada de busqueda.
   const onlyNumbers = /^[0-9]+$/;
   const onlyLetters = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/;
 
-  /*
-    if (onlyNumbers.test(content)) {
-      employees_ = await pool
-      .request()
-      .input('IdentificationToSearch', content)
-      .output("OutResulTCode", 0)
-      .execute("consultEmployeesIdentificationFilter");
-    }
-    if (onlyLetters.test(content)) {
-      employees_ = await pool
-      .request()
-      .input('NameToSearch', content)
-      .output("OutResulTCode", 0)
-      .execute("consultEmployeesNameFilter");
-    } 
-   */ 
+  const username = req.session.username;
+  const clientIP = ip.address(); 
+
   try {
     // Obtener una conexión desde el pool de conexiones
     const pool = await getConnection();
@@ -34,6 +22,8 @@ const listOfEmployees = async (req, res) => {
       employees_ = await pool 
       .request()
       .input('IdentificationToSearch', content)
+      .input('InNameUser', username)
+      .input('InIpAddress', clientIP)
       .output("OutResulTCode", 0)
       .execute("consultEmployeesIdentificationFilter");
     }
@@ -41,6 +31,8 @@ const listOfEmployees = async (req, res) => {
       employees_ = await pool
       .request()
       .input('NameToSearch', content)
+      .input('InNameUser', username)
+      .input('InIpAddress', clientIP)
       .output("OutResulTCode", 0)
       .execute("consultEmployeesNameFilter");
     }  
@@ -48,6 +40,8 @@ const listOfEmployees = async (req, res) => {
       employees_ = await pool
       .request()
       .input('NameToSearch', '##')
+      .input('InNameUser', username)
+      .input('InIpAddress', clientIP)
       .output("OutResulTCode", 0)
       .execute("consultEmployeesNameFilter");
     } 
@@ -74,10 +68,50 @@ const listOfEmployees = async (req, res) => {
   }
 };
 
+<<<<<<< Updated upstream
 //Cargar la vista "insertEmployee"
 const addEmployees = (req, res) => {
   //Carga la vista "insertEmployee"
   res.render("insertEmployee");
+=======
+const addEmployees = async (req, res) => {
+  res.render('insertEmployee', {errorMessage:""})
+}
+
+const CheckEmployees = async (req, res) => {
+  const clientIP = ip.address(); 
+  const nameEmployee = req.body.nameEmployee;
+  const identity = req.body.identity;
+  const position = req.body.position;
+  try {
+    // Obtener una conexión desde el pool de conexiones
+    const pool = await getConnection();
+    // Llamar al procedimiento almacenado insertEmployee
+    const employee_ = await pool
+      .request()
+      .input("InNameEmployee", nameEmployee)
+      .input("InDocumentIdentity", identity)
+      .input("InPosition", position)
+      .input("InIpAddress",clientIP)
+      .output("OutResultCode", 0)
+      .execute("insertEmployee");
+    if (employee_.output.OutResultCode == 0) {
+      // Renderizar la vista "listEmployees" con los datos obtenidos de las consultas 
+      res.redirect('listEmployees');
+    } else if (employee_.output.OutResultCode == 1) {
+      res.render("insertEmployee",{errorMessage:"Error: Empleado con ValorDocumentoIdentidad ya existe en inserción"})
+    } else {
+      res.render("insertEmployee",{errorMessage:"Error: Empleado con nombre ya existe en inserción"})
+    }
+    // Cerrar la conexión al pool
+    pool.close();
+  } catch (error) {
+    // Manejar errores internos del servidor
+    console.error("Error interno del servidor:", error.message);
+    // Enviar una respuesta al cliente indicando que hubo un error
+    res.status(500).send("Error interno del servidor.");
+  }
+>>>>>>> Stashed changes
 };
 
 //Se despliega la alerta para confirmar eliminacion de empleado
@@ -121,6 +155,8 @@ const confirmDeleteEmployee = async (req, res) => {
 //Se elimina un empleado de forma lógica en la base de datos
 const deleteEmployee = async (req, res) => {
   const IdEmployee = req.body.IdEmpleado;
+  const username = req.session.username;
+  const clientIP = ip.address(); 
   try {
     // Obtener una conexión desde el pool de conexiones
     const pool = await getConnection();
@@ -128,6 +164,8 @@ const deleteEmployee = async (req, res) => {
     const employee_ = await pool
       .request()
       .input("InIdEmployee", IdEmployee)
+      .input("InNameUser", username)
+      .input("InIpAddress", clientIP)
       .output("OutResulTCode", 0)
       .execute("logicalDeleteEmployee");
     // Verificar si el procedimiento almacenado se ejecutó correctamente
@@ -185,15 +223,15 @@ const updateEmployee = async (req, res) => {
   }
 };
 
-//Se realiza la acrualización del empleado
+//Se realiza la actualizacion del empleado
 const commitUpdateEmployee = async (req, res) => {
-  const IdEmployee = req.body.IdEmpleado;
-  const nameEmployee = req.body.newName;
+  const IdEmployee = req.body.IdEmpleado
+  const newnameEmployee = req.body.newName;
   const docValueId = req.body.newIdentification;
   const namePosition = req.body.newPosition;
+  const username = req.session.username;
+  const clientIP = ip.address(); 
 
-  console.log('Id:', IdEmployee, 'Datos:', nameEmployee, '- Identificación', docValueId, '- Puesto', namePosition)
-  
   // Expresión regular que busca números o caracteres que no son letras
   var patron = /[^a-zA-Z-áéíóúÁÉÍÓÚüÜñÑ\s]/;
   try {
@@ -201,7 +239,7 @@ const commitUpdateEmployee = async (req, res) => {
     const pool = await getConnection();
 
     // Retorna true si se encuentra al menos un carácter que no es una letra y un espacio
-    if (patron.test(nameEmployee)) {
+    if (patron.test(newnameEmployee)) {
       // Llamar al procedimiento almacenado consultEmployee
       const employee_ = await pool
         .request()
@@ -223,25 +261,46 @@ const commitUpdateEmployee = async (req, res) => {
         });
       } else {
         // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
-        console.log("Variable salida:", employee_.output.outResulTCode);
+        console.log("Variable salida:", employee_.output.OutResulTCode);
       } 
     } else {
+      // Llamar al procedimiento almacenado consultEmployee
+      const employee_ = await pool
+        .request()
+        .input("InIdEmployee", IdEmployee)
+        .output("OutResulTCode", 0)
+        .execute("consultEmployee");
+      // Llamar al procedimiento almacenado consultEmployee
+      const positions_ = await pool
+        .request()
+        .output("OutResulTCode", 0)
+        .execute("consultPositions");
       // Llamar al procedimiento almacenado consultEmployee
       const update = await pool
         .request()
         .input("InIdEmployee", IdEmployee)
         .input("InNewPositionName", namePosition)
         .input("InNewDocValueId", docValueId)
-        .input("InNewName", nameEmployee)
+        .input("InNewName", newnameEmployee)
+        .input("InNameUser",username )
+        .input("InIpAddress",clientIP )
         .output("OutResulTCode", 0)
         .execute("updateEmployee");
       // Verificar si el procedimiento almacenado se ejecutó correctamente
       if (update.output.OutResulTCode == 0) {
-        // Redireccion a la vista "listEmployees"
         res.redirect("listEmployees");
-      } else {
-        // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
-        console.log("Variable salida:", update.output.outResulTCode);
+      } 
+      if (update.output.OutResulTCode == 1) {
+        res.render("updateEmployee", {
+          employee: employee_.recordset[0]
+          , positions: positions_.recordset
+          , errorMessage: 'Error: DocumentoIdentidad ya existe'})
+      }
+      if (update.output.OutResulTCode == 2){
+        res.render("updateEmployee", {
+          employee: employee_.recordset[0]
+          , positions: positions_.recordset
+          , errorMessage: 'Error: nombre ya existe'})
       }
     }
     // Cerrar la conexión al pool
