@@ -1,5 +1,8 @@
 const { getConnection } = require("../database/connection");
 const path = require("path");
+const ip = require("ip");
+const session = require('express-session');
+
 
 //Se la envia la direccion completa del archivo XML a un SP para que con 
 //esta obtenga los datos del archivo y los procese
@@ -14,13 +17,12 @@ const root = async (req, res) => {
     const pool = await getConnection();
   
     // Llamada al procedimiento almacenado loadXMLData
-    const result = await pool
-      .request()
+    const result = await pool.request()
       .input("xmlFilePath", completeRoute)
-      .output("OutResulTCode", 0)
+      .output("OutResultCode", 0)
       .execute("loadXMLData");
   
-    if (result.output.OutResulTCode == 0) {
+    if (result.output.OutResultCode == 0) {
       console.log("Se cargaron los datos :D"); 
     } else {
       console.log("Algo salio mal con la carga de datos :O"); 
@@ -35,7 +37,7 @@ const root = async (req, res) => {
 }
 
 const loginUser = async (req, res) => {
-  res.render('login')
+  res.render('login', {errorMessage: ""});
 }
 
 const CheckloginUser = async (req, res) => {
@@ -43,6 +45,7 @@ const CheckloginUser = async (req, res) => {
     // Validar los datos de entrada
     const username = req.body.username;
     const password = req.body.password;
+    const clientIP = ip.address(); 
    
     if (!username || !password) {
       res.status(400).send('El nombre de usuario y la contraseña son obligatorios.');
@@ -52,25 +55,26 @@ const CheckloginUser = async (req, res) => {
     const pool = await getConnection();
 
     try {
-      // Llamar al procedimiento almacenado
+      // Llamar al procedimiento almacenado ValidateUser
       const result = await pool.request()
-        .input("User", username)
-        .input("Password", password)
-        .output("OutResulTCode", 0)
+        .input("InUser", username)
+        .input("InPassword", password)
+        .input("InIpAddress", clientIP)
+        .output("OutResultCode", 0)
         .execute("ValidateUser");
 
       // Verificar si el procedimiento almacenado se ejecutó correctamente
-      if (result.output.OutResulTCode == 0) {
-        // Renderizar la vista "listEmployees" con los datos obtenidos de la consulta 
+      if (result.output.OutResultCode == 0) {
+        req.session.username = username;
         res.redirect("listEmployees");
-      } else {
-        // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
-        res.render("Login", { // 
-          errorMessage: "Error: Error en el inicio de sesion. Intentelo de nuevo",
-          successMessage : ""
-        });
-        return;
       }
+      if (result.output.OutResultCode == 1) {
+        res.render("login",{errorMessage:"Error: Username no existe"});
+      }
+      if (result.output.OutResultCode == 2){
+        res.render("login",{errorMessage: "El password es incorrecto"});
+      }
+      
     } catch (error) {
       // Manejar errores al ejecutar el procedimiento almacenado
       console.error("Error al ejecutar el procedimiento almacenado:", error);
@@ -86,4 +90,4 @@ const CheckloginUser = async (req, res) => {
   }
 };
 
-module.exports = { root, CheckloginUser, loginUser };
+module.exports = { root, CheckloginUser, loginUser};

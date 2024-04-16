@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,32 +14,35 @@
     <!-- Referencia al archivo de estilos CSS -->
     <link rel="stylesheet" href="/css/style.css">
 
-    <title>Iniciar Sesion</title>
+    <title>Inicio de Sesión</title>
 
 </head>
 
-<body> 
+<body>
     <div class="container">
         <div class="m-4 d-flex justify-content-center mt-4" style="height: auto;">
             <div class="bg-dark" style="width: 500px; height: auto;">
-                
-                <div class=" text-center mt-3"> 
+                <div class="text-center mt-3"> 
                     <h4 class="text-light">Iniciar Sesion</h4>
                 </div>
-
-                <form action="/Login" method="post"> 
+    
+                <form id="loginUser" action="/login" method="post"> 
                     <div class="form-group row mt-5 text-light">
                         <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Usuario</label>
                         <div> 
                             <input type="text" name="username" class="form-control col-sm-auto" style="border-radius: 8px;" required>
                         </div>
                     </div>
-                    <div class="form-group row mt-2 text-light">
-                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Password</label>
-                        <div> 
-                            <input type="password" name="password" class="form-control col-sm-auto" style="border-radius: 8px;" required>
+                    <div class="form-group row text-light">
+                        <label for="password" class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Contraseña</label>
+                        <div class="col-sm-auto"> 
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Ingrese su contraseña" required>
                         </div>
                     </div>
+                    <span class="d-flex mb-3 ml-4" style="color: red">
+                        <%= errorMessage %>
+                      </span>
                     <div class="form-group mb-4">
                         <button type="submit" title="Insertar" class="btn btn-outline-light ml-4 mt-4 d-flex"
                             style="font-size: 15px;">
@@ -47,12 +50,9 @@
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
-    </div>
+    </div>  
 
 </body>
-
 </html>
-
