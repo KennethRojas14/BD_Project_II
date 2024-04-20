@@ -127,6 +127,7 @@ const confirmDeleteEmployee = async (req, res) => {
     // Verificar si el procedimiento almacenado se ejecutó correctamente
     if (employees_.output.OutResulTCode == 0 && employee_.output.OutResulTCode == 0) {
       // Renderizar la vista "listEmployees" con los datos obtenidos de las consultas 
+      
       res.render("listEmployees", {
         employees: employees_.recordset
         , alertVisibility: true
@@ -336,6 +337,37 @@ const consultEmployee = async (req, res) => {
   }
 };
 
+//Realiza insercion de eventos al LogbookEvents
+const insertEvents = async (req, res, IdTypeEvent) => {
+  const username = req.session.username;
+  const clientIP = ip.address(); 
+  try {
+    // Obtener una conexión desde el pool de conexiones
+    const pool = await getConnection();
+    // Llamar al procedimiento almacenado logicalDeleteEmployee
+    const result = await pool
+      .request()
+      .input("InTypeEvent", IdTypeEvent)
+      .input("InNameUser", username)
+      .input("InIpAddress", clientIP)
+      .output("OutResultCode", 0)
+      .execute("InsertEvent");
+    // Verificar si el procedimiento almacenado se ejecutó correctamente
+    if (result.output.OutResultCode == 0) {
+      console.log("Insercion correcta. Logout");
+    } else {
+      // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
+      console.log("Algo falló.");
+    }
+    // Cerrar la conexión al pool
+    pool.close();
+  } catch (error) {
+    // Manejar errores internos del servidor
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
 module.exports = {
   listOfEmployees
   , addEmployees
@@ -345,4 +377,5 @@ module.exports = {
   , updateEmployee
   , commitUpdateEmployee
   , consultEmployee
+  , insertEvents
 };

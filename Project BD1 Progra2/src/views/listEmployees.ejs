@@ -105,12 +105,19 @@
           </a>
         </div>
         <div class="cmn-divfloat-left">
-          <a href="http://localhost:3000/login" title="Cerrar sesión" class="btn btn-dark cmn-btncircle">
+          <a href="http://localhost:3000/login" title="Cerrar sesión" onclick="insertEvents()" class="btn btn-dark cmn-btncircle">
             <i class='bx bx-arrow-back'></i>
+            
           </a>
         </div>
 
   </div>
+  <script src="../controllers/employee.controller.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      insertEvents();
+    });
+  </script>
 
 </body>
 

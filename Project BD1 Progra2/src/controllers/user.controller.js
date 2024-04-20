@@ -1,7 +1,6 @@
 const { getConnection } = require("../database/connection");
 const path = require("path");
 const ip = require("ip");
-const session = require('express-session');
 
 
 //Se la envia la direccion completa del archivo XML a un SP para que con 
@@ -74,7 +73,9 @@ const CheckloginUser = async (req, res) => {
       if (result.output.OutResultCode == 2){
         res.render("login",{errorMessage: "El password es incorrecto"});
       }
-      
+      if (result.output.OutResultCode == 3){
+        res.status(500).send('Pagina desabilitada. Exceso de intentos permitidos');
+      }
     } catch (error) {
       // Manejar errores al ejecutar el procedimiento almacenado
       console.error("Error al ejecutar el procedimiento almacenado:", error);
