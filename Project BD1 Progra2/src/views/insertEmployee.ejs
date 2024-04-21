@@ -18,31 +18,34 @@
 
 </head>
 
-<body> 
+<body>
     <div class="container">
         <div class="m-4 d-flex justify-content-center mt-4" style="height: auto;">
             <div class="bg-dark" style="width: 500px; height: auto;">
-                
-                <div class=" text-center mt-3"> 
+
+                <div class=" text-center mt-3">
                     <h4 class="text-light">Inserción de empleado</h4>
                 </div>
 
-                <form action="/insertEmployee" method="post"> 
+                <form action="/insertEmployee" method="post">
                     <div class="form-group row mt-5 text-light">
                         <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Nombre:</label>
-                        <div> 
-                            <input type="text" name="nameEmployee" class="form-control col-sm-auto" style="border-radius: 8px;" required>
+                        <div>
+                            <input type="text" name="nameEmployee" class="form-control col-sm-auto"
+                                style="border-radius: 8px;" required>
                         </div>
                     </div>
                     <div class="form-group row mt-2 text-light">
-                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Valor tipo documento:</label>
-                        <div> 
-                            <input type="text" name="identity" class="form-control col-sm-auto" style="border-radius: 8px;" required>
+                        <label class="ml-4 col-sm-5 col-form-label" style="font-weight: 600;">Valor tipo
+                            documento:</label>
+                        <div>
+                            <input type="text" name="identity" class="form-control col-sm-auto"
+                                style="border-radius: 8px;" required>
                         </div>
                     </div>
-                    <div class="form-group row mt-3 text-light">
+                    <!-- <div class="form-group row mt-3 text-light">
                         <label class="ml-4 col-sm-6 col-form-label" style="font-weight: 600;">Puesto:</label>
-                        <select class="form-select " name="position" style="border-radius: 8px; width: 39%" required> 
+                        <select class="form-select " name="position" style="border-radius: 8px; width: 39%" required>
                             <option value="cajero">Cajero</option>
                             <option value="camarero">Camarero</option>
                             <option value="cuidador">Cuidador</option>
@@ -53,11 +56,23 @@
                             <option value="Niñera">Niñera</option>
                             <option value="Conserje">Conserje</option>
                             <option value="Albañil">Albañil</option>
-                        </select> 
+                        </select>
+                    </div> -->
+
+                    <div class="form-group row mt-3 text-light">
+                        <label class="ml-4 col-sm-5 col-form-label">Puesto:</label>
+                        <select class="form-select" name="position"
+                            style="border-radius: 8px; left: 30%;"> 
+                            <% positions.forEach((position)=>{ %>
+                                <option value="<%=position.Name%>"><%=position.Name%></option>
+                                
+                            <% }) %> 
+                        </select>
                     </div>
+
                     <span class="d-flex mb-3 ml-4" style="color: red">
                         <%= errorMessage %>
-                      </span>
+                    </span>
                     <div class="form-group mb-4">
                         <button type="submit" title="Insertar" class="btn btn-outline-light ml-4 mt-4 d-flex"
                             style="font-size: 15px;">
@@ -67,6 +82,12 @@
                 </form>
 
             </div>
+        </div>
+
+        <div class="cmn-divfloat-left">
+            <a href="http://localhost:3000/listEmployees" title="Volver" class="btn btn-dark cmn-btncircle">
+                <i class='bx bx-arrow-back'></i>
+            </a>
         </div>
     </div>
 

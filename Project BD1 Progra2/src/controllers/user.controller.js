@@ -91,4 +91,16 @@ const CheckloginUser = async (req, res) => {
   }
 };
 
-module.exports = { root, CheckloginUser, loginUser};
+//Realiza insercion de eventos al LogbookEvents
+const logoutCapture = async (req, res) => {
+  console.log('\n -- En insert event --\n')
+  const username = req.session.username;
+  const clientIP = ip.address();
+
+  
+  
+  res.redirect("login");
+
+}
+
+module.exports = { root, CheckloginUser, loginUser, logoutCapture};

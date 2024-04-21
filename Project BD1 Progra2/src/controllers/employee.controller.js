@@ -69,7 +69,32 @@ const listOfEmployees = async (req, res) => {
 };
 
 const addEmployees = async (req, res) => {
-  res.render('insertEmployee', {errorMessage:""})
+  try{
+    // Se obtiene coneccion a la base de datos
+    const pool = await getConnection(); 
+    // Llamar al procedimiento almacenado consultEmployee
+    const positions_ = await pool
+      .request()
+      .output("OutResulTCode", 0)
+      .execute("consultPositions");
+    // Verificar si el procedimiento almacenado se ejecutó correctamente
+    if (positions_.output.OutResulTCode == 0) {
+      // Renderizar la vista "updateEmployee" con los datos obtenidos de la consulta 
+      res.render("insertEmployee", { 
+        positions: positions_.recordset
+        , errorMessage: ''
+      });
+    } else {
+      // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
+      console.log("Variable salida:", employee_.output.outResulTCode);
+    }
+    // Se cierra la conexion
+    pool.close()
+  } catch (error) {
+    // Manejar errores internos del servidor
+    res.status(500);
+    res.send(error.message);
+  } 
 }
 
 const CheckEmployees = async (req, res) => {

@@ -104,20 +104,34 @@
             <i class='bx bxs-plus-circle bx-md'></i>
           </a>
         </div>
-        <div class="cmn-divfloat-left">
+        <!-- <div class="cmn-divfloat-left">
           <a href="http://localhost:3000/login" title="Cerrar sesión" onclick="insertEvents()" class="btn btn-dark cmn-btncircle">
-            <i class='bx bx-arrow-back'></i>
+            i class='bx bx-arrow-back'></i-->
+            <!-- <i class='bx bx-log-out' ></i>
             
           </a>
+        </div> -->
+
+        <div class="cmn-divfloat-left">
+          <form action="/logout" method="POST"> 
+            <!-- <a type="submit" title="Cerrar sesión" class="btn btn-dark cmn-btncircle" style="color: white;">
+              <i class='bx bx-log-out' ></i>
+            </a> -->
+            
+            <button type="submit" title="Cerrar sesión" class="btn btn-dark cmn-btncircle">
+              <i class='bx bx-log-out' ></i>
+            </button>
+
+          </form>
         </div>
 
   </div>
-  <script src="../controllers/employee.controller.js"></script>
+  <!-- <script src="../controllers/employee.controller.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       insertEvents();
     });
-  </script>
+  </script> -->
 
 </body>
 
