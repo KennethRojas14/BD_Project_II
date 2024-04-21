@@ -92,15 +92,34 @@ const CheckloginUser = async (req, res) => {
 };
 
 //Realiza insercion de eventos al LogbookEvents
-const logoutCapture = async (req, res) => {
-  console.log('\n -- En insert event --\n')
+const logoutCapture = async (req, res, ) => {
   const username = req.session.username;
-  const clientIP = ip.address();
-
-  
-  
-  res.redirect("login");
-
-}
+  const clientIP = ip.address(); 
+  try {
+    // Obtener una conexión desde el pool de conexiones
+    const pool = await getConnection();
+    // Llamar al procedimiento almacenado logicalDeleteEmployee
+    const result = await pool
+      .request()
+      .input("InNameUser", username)
+      .input("InIpAddress", clientIP)
+      .output("OutResultCode", 0)
+      .execute("InsertEvent");
+    // Verificar si el procedimiento almacenado se ejecutó correctamente
+    if (result.output.OutResultCode == 0) {
+      console.log("Insercion correcta. Logout");
+      res.redirect("login")
+    } else {
+      // Manejar el caso en el que el procedimiento almacenado no se ejecutó correctamente
+      console.log("Algo falló.");
+    }
+    // Cerrar la conexión al pool
+    pool.close();
+  } catch (error) {
+    // Manejar errores internos del servidor
+    res.status(500);
+    res.send(error.message);
+  }
+};
 
 module.exports = { root, CheckloginUser, loginUser, logoutCapture};
